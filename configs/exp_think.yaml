@@ -1,0 +1,21 @@
+# 탐색 실험: <think> 추론 학습 (GPU 1장, exp_nothink와 동시 비교)
+model_path: models/qwen3-vl-4b-thinking
+train_jsonl: data/sft/v1_think/train.jsonl
+val_jsonl: data/sft/v1_think/val.jsonl
+train_limit: 20000
+output_dir: outputs/exp_think
+run_name: exp_think
+
+lora: { r: 32, alpha: 64, dropout: 0.05 }
+freeze_vision: true
+
+per_device_batch: 8
+grad_accum: 2
+lr: 1.0e-4
+epochs: 1
+max_length: 4096
+num_workers: 6
+gradient_checkpointing: false
+eval_steps: 200
+save_steps: 200
+report_to: wandb

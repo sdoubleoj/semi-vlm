@@ -1,0 +1,19 @@
+# 모델 가중치 (8.4GB)
+models/
+
+# 데이터셋
+data/images/
+data/*.parquet
+
+# 파이썬
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+.venv/
+venv/
+
+# 기타
+.DS_Store
+.env

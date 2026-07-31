@@ -1,0 +1,22 @@
+# 본 학습 full FT (GPU 4장, torchrun --nproc_per_node=4 + DeepSpeed ZeRO-2)
+# 8B 진행 시 model_path와 output_dir만 교체 (lr은 1.0e-5로 하향 권장)
+model_path: models/qwen3-vl-4b-thinking
+train_jsonl: data/sft/v1_think/train.jsonl
+val_jsonl: data/sft/v1_think/val.jsonl
+output_dir: outputs/full_ft_4b
+run_name: full_ft_4b
+
+lora: null                 # full fine-tuning
+freeze_vision: false       # 2차 실험에서 비전 언프리즈 비교 (1차는 true 권장)
+
+per_device_batch: 16
+grad_accum: 1
+lr: 2.0e-5
+epochs: 2
+max_length: 4096
+num_workers: 6
+gradient_checkpointing: false
+deepspeed: configs/ds_zero2.json
+eval_steps: 500
+save_steps: 500
+report_to: wandb

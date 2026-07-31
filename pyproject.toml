@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wafervlm"
+version = "0.1.0"
+description = "Wafer map defect readout VLM fine-tuning (Qwen3-VL-Thinking)"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy",
+    "pandas",
+    "pyarrow",
+    "pillow",
+    "scipy",
+    "pydantic>=2",
+    "pyyaml",
+    "tqdm",
+    "requests",
+]
+
+[project.optional-dependencies]
+train = ["transformers>=4.57", "accelerate", "peft", "datasets", "deepspeed", "qwen-vl-utils", "wandb"]
+serve = ["fastapi", "uvicorn", "python-multipart"]
+dev = ["pytest", "matplotlib"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

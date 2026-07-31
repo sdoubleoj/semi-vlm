@@ -1,0 +1,20 @@
+# M3-(1) 오버핏 테스트: 소규모 서브셋에서 loss가 0 근처로 떨어지는지 (파이프라인 버그 검증)
+model_path: models/qwen3-vl-4b-thinking
+train_jsonl: data/sft/v1_think/train.jsonl
+train_limit: 2000          # 서브셋
+val_jsonl: null
+output_dir: outputs/lora_overfit
+
+lora: { r: 32, alpha: 64, dropout: 0.0 }
+freeze_vision: true
+
+per_device_batch: 8
+grad_accum: 1
+lr: 1.0e-4
+epochs: 10                 # 의도적 오버핏
+max_length: 4096
+num_workers: 6
+gradient_checkpointing: false
+logging_steps: 5
+save_steps: 100000         # 저장 불필요
+report_to: none

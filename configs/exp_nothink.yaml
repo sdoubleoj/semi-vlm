@@ -1,0 +1,21 @@
+# 탐색 실험 대조군: 빈 <think> (exp_think와 동일 조건, 데이터만 v1_nothink)
+model_path: models/qwen3-vl-4b-thinking
+train_jsonl: data/sft/v1_nothink/train.jsonl
+val_jsonl: data/sft/v1_nothink/val.jsonl
+train_limit: 20000
+output_dir: outputs/exp_nothink
+run_name: exp_nothink
+
+lora: { r: 32, alpha: 64, dropout: 0.05 }
+freeze_vision: true
+
+per_device_batch: 8
+grad_accum: 2
+lr: 1.0e-4
+epochs: 1
+max_length: 4096
+num_workers: 6
+gradient_checkpointing: false
+eval_steps: 200
+save_steps: 200
+report_to: wandb
